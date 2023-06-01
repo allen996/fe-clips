@@ -1,13 +1,15 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useMenuStore } from '../stores/menu'
+defineProps<{
+  menus: any
+  current: any
+}>()
+const emits = defineEmits<{
+  scroll: [id: number, menu: string]
+}>()
 
-const menuStore = useMenuStore()
-let current = ref(1)
-function menuActive(id: number): void {
-  current = ref(id)
+function menuActive(id: number, menu: string): void {
+  emits('scroll', id, menu)
 }
-console.log(current)
 </script>
 
 <template>
@@ -18,8 +20,8 @@ console.log(current)
     </div>
     <nav class="menu">
       <ul>
-        <li v-for="item in menuStore.menu" :key="item.id" @click="menuActive(item.id)">
-          <a class="menu-item" :class="{ active: current === item.id }" href="#">{{ item.menu }}</a>
+        <li v-for="item in menus" :key="item.id" @click="menuActive(item.id, item.menu)">
+          <a class="menu-item" :class="{ active: current === item.id }">{{ item.menu }}</a>
         </li>
       </ul>
     </nav>

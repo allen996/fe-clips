@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { defineProps } from 'vue'
-
-const props = defineProps(['classify'])
-console.log(props.classify)
+const props = defineProps<{
+  classify: any
+}>()
 </script>
 
 <template>
