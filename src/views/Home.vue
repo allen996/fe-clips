@@ -12,28 +12,48 @@ const linkStore = useLinkStore()
 let current = ref(1)
 
 function handleClipsScroll(id: number, menu: string): void {
-  current.value = id
-  const clips = document.getElementsByClassName('clips')
+  const clips = document.querySelectorAll('.clips')
   for (const item of clips) {
     if (item.getAttributeNode('menu')?.value === menu) {
       setTimeout(() => {
         item.scrollIntoView({ behavior: 'smooth' })
+        current.value = id
       })
     }
   }
 }
 
+function handleMenuSkip(): void {
+  const intersectionObserver = new IntersectionObserver((entries) => {
+    if (entries[0].intersectionRatio <= 0) return
+    const now = entries[0].target.getAttribute('menu')
+    menuStore.menu.forEach((element) => {
+      if (element.menu === now) {
+        current.value = element.id
+      }
+    })
+  })
+  const menu = document.querySelectorAll('.clips')
+  for (const item of menu) {
+    intersectionObserver.observe(item as HTMLElement)
+  }
+}
+
+/* 回到顶部 */
 let isToCeiling = ref(false)
 function handleBackTopScroll(): void {
   let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-  if (scrollTop > 360) {
+  if (scrollTop > 660) {
     isToCeiling.value = true
   } else {
     isToCeiling.value = false
   }
 }
 onMounted(() => {
-  window.addEventListener('scroll', handleBackTopScroll)
+  window.addEventListener('scroll', () => {
+    handleBackTopScroll()
+  })
+  handleMenuSkip()
 })
 onUnmounted(() => {
   window.removeEventListener('scroll', handleBackTopScroll)

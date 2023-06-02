@@ -37,8 +37,6 @@ function menuActive(id: number, menu: string): void {
   text-align: center;
   .logo {
     margin: 30px 10px;
-    border: 5px dotted #626aef;
-    border-radius: 30px;
     h1 {
       display: inline-block;
       font-family: system-ui;
@@ -60,7 +58,7 @@ function menuActive(id: number, menu: string): void {
           border-radius: 15px;
           color: #a3a4ab;
           margin: 0 auto;
-          &:hover {
+          &:not(.active):hover {
             color: #242629;
             background: #edeff6;
           }
@@ -68,11 +66,17 @@ function menuActive(id: number, menu: string): void {
         .active {
           color: #fff;
           background: #626aef;
-          transition: all 1s;
-          &:hover {
+          animation: menu 1.2s ease;
+        }
+        @keyframes menu {
+          0% {
+            transform: scale(0);
+          }
+          75% {
             transform: scale(1.1);
-            color: #242629;
-            background: #626aef;
+          }
+          100% {
+            transform: scale(1);
           }
         }
       }

@@ -7,16 +7,26 @@ const props = defineProps<{
 <template>
   <div class="clips">
     <header>
-      <h3><slot name="header"></slot></h3>
+      <h3>
+        <slot name="header">默认</slot>
+      </h3>
     </header>
-    <section>
-      <dl v-for="(item, index) in props.classify" :key="index">
-        <dt>{{ item.label }}</dt>
-        <dd v-for="(link, index) in item.link" :key="index">
-          <a :href="link.url">{{ link.name }}</a>
-        </dd>
-      </dl>
-    </section>
+    <div class="clips-list" v-for="(item, index) in props.classify" :key="index">
+      <div class="clips-list-label">{{ item.label }}</div>
+      <div class="clips-list-item">
+        <a
+          class="link"
+          v-for="(link, index) in item.link"
+          :key="index"
+          :href="link.url"
+          target="_blank"
+        >
+          <div class="card">
+            {{ link.name }}
+          </div>
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,13 +41,51 @@ const props = defineProps<{
   }
   header {
     text-align: left;
+    margin-bottom: 10px;
     h3 {
       display: inline-block;
-      border-bottom: 3px solid #626aef;
+      font-size: 20px;
+      border-bottom: 4px solid #626aef;
+      padding-bottom: 4px;
+      cursor: pointer;
+    }
+    &:hover {
+      &::after {
+        content: '#';
+        color: #626aef;
+        font-size: 20px;
+        font-weight: bold;
+        padding-left: 10px;
+      }
     }
   }
-  section {
+  .clips-list {
     border-bottom: 2px dashed #a3a4ab;
+    padding-bottom: 10px;
+    .clips-list-label {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    .clips-list-item {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-gap: 20px 10px;
+      grid-auto-rows: 100px;
+      .link {
+        font-size: 18px;
+        color: #2c3e50;
+        background: #eff1f4;
+        border-radius: 10px;
+        padding: 15px 20px;
+        transition: all 1s;
+        &:hover {
+          color: #fff;
+          background: #626aef;
+          // background: #bfc1f4;
+          transform: scale(1.06);
+        }
+      }
+    }
   }
 }
 </style>
