@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import SideBar from '../components/SideBar.vue'
 import ClipsMain from '../components/ClipsMain.vue'
-import ToCeiling from '../components/ToCeiling.vue'
+import BackTop from '../components/BackTop.vue'
 import { useMenuStore } from '../stores/menu'
 import { useLinkStore } from '../stores/link'
 
@@ -24,7 +24,7 @@ function handleClipsScroll(id: number, menu: string): void {
 }
 
 let isToCeiling = ref(false)
-function handleScroll(): void {
+function handleBackTopScroll(): void {
   let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
   if (scrollTop > 360) {
     isToCeiling.value = true
@@ -33,17 +33,17 @@ function handleScroll(): void {
   }
 }
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleBackTopScroll)
 })
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('scroll', handleBackTopScroll)
 })
 </script>
 
 <template>
   <SideBar :menus="menuStore.menu" :current="current" @scroll="handleClipsScroll" />
   <ClipsMain :links="linkStore.link" />
-  <ToCeiling v-show="isToCeiling" />
+  <BackTop v-show="isToCeiling" />
 </template>
 
 <style scoped lang="scss"></style>

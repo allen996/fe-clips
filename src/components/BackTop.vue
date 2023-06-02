@@ -1,17 +1,17 @@
 <script setup lang="ts">
-function handleToCeiling(): void {
+function handleBackTop(): void {
   ;(document.documentElement || document.body)?.scrollIntoView({ behavior: 'smooth' })
 }
 </script>
 
 <template>
-  <div id="to-ceiling" title="回到顶部">
-    <button @click="handleToCeiling">↑</button>
+  <div id="back-top" title="回到顶部">
+    <button @click="handleBackTop">↑</button>
   </div>
 </template>
 
 <style scoped lang="scss">
-#to-ceiling {
+#back-top {
   position: fixed;
   bottom: 80px;
   right: 50px;
