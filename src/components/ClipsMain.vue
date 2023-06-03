@@ -18,6 +18,7 @@ defineProps<{
 #app-main {
   margin-left: 300px;
   margin-right: 30px;
-  padding: 30px 0;
+  padding-top: 30px;
+  padding-bottom: 200px;
 }
 </style>

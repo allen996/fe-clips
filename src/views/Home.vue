@@ -17,23 +17,31 @@ function handleClipsScroll(id: number, menu: string): void {
     if (item.getAttributeNode('menu')?.value === menu) {
       setTimeout(() => {
         item.scrollIntoView({ behavior: 'smooth' })
-        current.value = id
+        /* 去掉当前导航标识变更让动画过渡更丝滑 */
+        // current.value = id
       })
     }
   }
 }
 
 function handleMenuSkip(): void {
-  const intersectionObserver = new IntersectionObserver((entries) => {
-    if (entries[0].intersectionRatio <= 0) return
-    const now = entries[0].target.getAttribute('menu')
-    menuStore.menu.forEach((element) => {
-      if (element.menu === now) {
-        current.value = element.id
-      }
-    })
-  })
-  const menu = document.querySelectorAll('.clips')
+  const intersectionObserver = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].intersectionRatio <= 0) return
+
+      const now = entries[0].target.textContent
+      menuStore.menu.forEach((element) => {
+        if (element.menu === now) {
+          current.value = element.id
+        }
+      })
+    },
+    {
+      rootMargin: '0px 0px -70% 0px'
+    }
+  )
+  const menu = document.querySelectorAll('.clips header')
+
   for (const item of menu) {
     intersectionObserver.observe(item as HTMLElement)
   }

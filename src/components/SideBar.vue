@@ -58,10 +58,10 @@ function menuActive(id: number, menu: string): void {
           border-radius: 15px;
           color: #a3a4ab;
           margin: 0 auto;
-          &:not(.active):hover {
-            color: #242629;
-            background: #edeff6;
-          }
+          // &:not(.active):hover {
+          //   color: #242629;
+          //   background: #edeff6;
+          // }
         }
         .active {
           color: #fff;
