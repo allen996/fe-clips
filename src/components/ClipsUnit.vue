@@ -27,6 +27,9 @@ const props = defineProps<{
         </a>
       </div>
     </div>
+    <div class="icon-clips">
+      <i class="iconfont icon-clips-logo"></i>
+    </div>
   </div>
 </template>
 
@@ -36,6 +39,7 @@ const props = defineProps<{
   background: #fff;
   padding: 40px;
   border-radius: 15px;
+  position: relative;
   &:not(:last-child) {
     margin-bottom: 20px;
   }
@@ -85,6 +89,15 @@ const props = defineProps<{
           transform: scale(1.06);
         }
       }
+    }
+  }
+  .icon-clips {
+    position: absolute;
+    top: -16px;
+    right: 5px;
+    content: '';
+    i {
+      color: #626aef;
     }
   }
 }
