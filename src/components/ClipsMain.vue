@@ -7,22 +7,20 @@ defineProps<{
 </script>
 
 <template>
-  <div id="app-main">
+  <main id="main">
     <ClipsUnit v-for="item in links" :key="item.menu" v-bind="item">
       <template #header>{{ item.menu }}</template>
     </ClipsUnit>
     <div class="placeholder">
       <img src="../assets/images/link.svg" alt="" />
     </div>
-  </div>
+  </main>
 </template>
 
 <style scoped lang="scss">
-#app-main {
-  margin-left: 300px;
-  margin-right: 30px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+#main {
+  padding: 30px 30px 30px 300px;
+  background-color: var(--fc-background-color-2);
   .placeholder {
     width: 100%;
     img {

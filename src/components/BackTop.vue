@@ -6,7 +6,9 @@ function handleBackTop(): void {
 
 <template>
   <div id="back-top" title="回到顶部">
-    <button @click="handleBackTop">↑</button>
+    <button @click="handleBackTop">
+      <i class="iconfont icon-cc-top"></i>
+    </button>
   </div>
 </template>
 
@@ -19,8 +21,8 @@ function handleBackTop(): void {
     width: 40px;
     height: 40px;
     font-size: 20px;
-    color: #fff;
-    background: #626aef;
+    color: var(--fc-color-white);
+    background: var(--fc-color-primary);
     border: none;
     border-radius: 50%;
     cursor: pointer;

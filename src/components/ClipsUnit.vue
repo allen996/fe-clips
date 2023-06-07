@@ -10,6 +10,7 @@ const props = defineProps<{
       <h3>
         <slot name="header">默认</slot>
       </h3>
+      <i class="iconfont icon-link2"></i>
     </header>
     <div class="clips-list" v-for="(item, index) in props.classify" :key="index">
       <div class="clips-list-label">{{ item.label }}</div>
@@ -27,16 +28,13 @@ const props = defineProps<{
         </a>
       </div>
     </div>
-    <div class="icon-clips">
-      <i class="iconfont icon-clips-logo"></i>
-    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .clips {
   width: 100%;
-  background: #fff;
+  background: var(--fc-background-color-1);
   padding: 40px;
   border-radius: 15px;
   position: relative;
@@ -46,20 +44,26 @@ const props = defineProps<{
   header {
     text-align: left;
     margin-bottom: 10px;
+    position: relative;
+    i {
+      display: none;
+      position: absolute;
+      color: #626aef;
+      font-size: 20px;
+    }
     h3 {
       display: inline-block;
       font-size: 20px;
-      border-bottom: 4px solid #626aef;
-      padding-bottom: 4px;
+      border-left: 4px solid #626aef;
+      // border-radius: 15px;
+      padding-left: 20px;
+      padding-right: 40px;
+      background: linear-gradient(var(--fc-gradient));
       cursor: pointer;
     }
     &:hover {
-      &::after {
-        content: '#';
-        color: #626aef;
-        font-size: 20px;
-        font-weight: bold;
-        padding-left: 10px;
+      i {
+        display: inline-block;
       }
     }
   }
@@ -77,27 +81,17 @@ const props = defineProps<{
       grid-auto-rows: 100px;
       .link {
         font-size: 18px;
-        color: #2c3e50;
-        background: #eff1f4;
+        color: var(--fc-text-color);
+        background: var(--fc-background-color-2);
         border-radius: 10px;
         padding: 15px 20px;
         transition: all 1s;
         &:hover {
           color: #fff;
           background: #626aef;
-          // background: #bfc1f4;
           transform: scale(1.06);
         }
       }
-    }
-  }
-  .icon-clips {
-    position: absolute;
-    top: -16px;
-    right: 5px;
-    content: '';
-    i {
-      color: #626aef;
     }
   }
 }

@@ -1,0 +1,68 @@
+:root {
+  --fc-color-primary: #626aef;
+  --fc-color-white: #ffffff;
+  --fc-color-white-soft: #eff1f4;
+  --fc-color-black: #1a1a1a;
+  --fc-color-black-soft: #242424;
+  --fc-color-indigo: #213547;
+  --fc-color-gray: #8e8e8e;
+
+  --fc-color-divider-light-1: rgba(60, 60, 60, 0.29);
+  --fc-color-divider-dark-1: rgba(84, 84, 84, 0.65);
+
+  --fc-color-text-light-1: var(--fc-color-indigo);
+  --fc-color-text-light-2: rgba(60, 60, 60, 0.66);
+  --fc-color-text-dark-1: rgba(235, 235, 235, 0.64);
+  --fc-color-text-dark-2: var(--fc-color-white);
+}
+
+:root {
+  --fc-background-color-1: var(--fc-color-white);
+  --fc-background-color-2: var(--fc-color-white-soft);
+
+  --fc-border-color: var(--fc-color-divider-light-1);
+  --fc-border-color-hover: var(--fc-color-gray);
+
+  --fc-heading-color: var(--fc-color-text-light-1);
+  --fc-text-color: var(--fc-color-text-light-1);
+
+  --fc-gradient: to left, var(--fc-color-white-soft), transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fc-background-color-1: var(--fc-color-black);
+    --fc-background-color-2: var(--fc-color-black-soft);
+
+    --fc-border-color: var(--fc-color-divider-dark-1);
+    --fc-border-color-hover: var(--fc-color-gray);
+
+    --fc-heading-color: var(--fc-color-text-dark-1);
+    --fc-text-color: var(--fc-color-text-dark-2);
+
+    --fc-gradient-direction: to right, var(--fc-color-black-soft), transparent;
+  }
+}
+
+.dark {
+  --fc-background-color-1: var(--fc-color-black);
+  --fc-background-color-2: var(--fc-color-black-soft);
+
+  --fc-border-color: var(--fc-color-divider-dark-1);
+  --fc-border-color-hover: var(--fc-color-gray);
+
+  --fc-heading-color: var(--fc-color-text-dark-1);
+  --fc-text-color: var(--fc-color-text-dark-2);
+
+  --fc-gradient-direction: to right, var(--fc-color-black-soft), transparent;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--fc-text-color);
+  background: var(--fc-background-color-1);
+  font-size: 15px;
+  // text-rendering: optimizeLegibility;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+}
