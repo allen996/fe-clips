@@ -86,41 +86,42 @@ const props = defineProps<{
       .link {
         color: var(--fc-text-color);
         background: var(--fc-background-color-2);
+        border: 1px solid transparent;
         border-radius: 10px;
-        .card {
-          padding: 15px 20px;
-          &:hover {
-            h3 {
-              color: var(--fc-color-primary);
-              &::before {
-                transform: translate(-50%, 0) scaleX(1);
-              }
-            }
-          }
+        padding: 15px 20px;
+        &:hover {
+          border: 1px solid var(--fc-color-primary);
           h3 {
-            display: inline-block;
-            font-size: 1.125rem;
-            margin-bottom: 15px;
-            position: relative;
+            color: var(--fc-color-primary);
             &::before {
-              content: '';
-              position: absolute;
-              left: 50%;
-              bottom: 0;
-              width: 100%;
-              height: 2px;
-              background-color: var(--fc-color-primary);
-              transform-origin: center;
-              transform: translate(-50%, 0) scaleX(0);
-              transition: transform 0.3s ease-in-out;
+              transform: translate(-50%, 0) scaleX(1);
             }
           }
-          p {
-            font-size: 0.875rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        }
+
+        h3 {
+          display: inline-block;
+          font-size: 1.125rem;
+          margin-bottom: 15px;
+          position: relative;
+          &::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--fc-color-primary);
+            transform-origin: center;
+            transform: translate(-50%, 0) scaleX(0);
+            transition: transform 0.3s ease-in-out;
           }
+        }
+        p {
+          font-size: 0.875rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
