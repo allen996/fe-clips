@@ -7,9 +7,9 @@ const props = defineProps<{
 <template>
   <div class="clips">
     <header>
-      <h3>
+      <h2>
         <slot name="header">默认</slot>
-      </h3>
+      </h2>
       <i class="iconfont icon-link2"></i>
     </header>
     <div class="clips-list" v-for="(item, index) in props.classify" :key="index">
@@ -23,7 +23,10 @@ const props = defineProps<{
           target="_blank"
         >
           <div class="card">
-            {{ link.name }}
+            <h3>
+              {{ link.name }}
+            </h3>
+            <p>面向前端设计人员和开发人员的社交开发环境</p>
           </div>
         </a>
       </div>
@@ -51,15 +54,16 @@ const props = defineProps<{
       color: #626aef;
       font-size: 20px;
     }
-    h3 {
+    h2 {
       display: inline-block;
       font-size: 20px;
-      border-left: 4px solid #626aef;
-      // border-radius: 15px;
-      padding-left: 20px;
+      color: var(--fc-heading-color);
+      border-left: 10px solid #626aef;
+      padding-left: 30px;
       padding-right: 40px;
       background: linear-gradient(var(--fc-gradient));
       cursor: pointer;
+      clip-path: polygon(0 0, 100% 0, 80% 50%, 100% 100%, 0 100%);
     }
     &:hover {
       i {
@@ -76,20 +80,47 @@ const props = defineProps<{
     }
     .clips-list-item {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       grid-gap: 20px 10px;
       grid-auto-rows: 100px;
       .link {
-        font-size: 18px;
         color: var(--fc-text-color);
         background: var(--fc-background-color-2);
         border-radius: 10px;
-        padding: 15px 20px;
-        transition: all 1s;
-        &:hover {
-          color: #fff;
-          background: #626aef;
-          transform: scale(1.06);
+        .card {
+          padding: 15px 20px;
+          &:hover {
+            h3 {
+              color: var(--fc-color-primary);
+              &::before {
+                transform: translate(-50%, 0) scaleX(1);
+              }
+            }
+          }
+          h3 {
+            display: inline-block;
+            font-size: 1.125rem;
+            margin-bottom: 15px;
+            position: relative;
+            &::before {
+              content: '';
+              position: absolute;
+              left: 50%;
+              bottom: 0;
+              width: 100%;
+              height: 2px;
+              background-color: var(--fc-color-primary);
+              transform-origin: center;
+              transform: translate(-50%, 0) scaleX(0);
+              transition: transform 0.3s ease-in-out;
+            }
+          }
+          p {
+            font-size: 0.875rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
         }
       }
     }

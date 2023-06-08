@@ -13,7 +13,7 @@ function menuActive(id: number, menu: string): void {
   emits('scroll', id, menu)
 }
 
-const introText = ref('本项目旨在收录前端各类资源，欢迎大佬帮助补充！')
+const introText = ref('本项目旨在收录前端各类资源，期待大佬帮助补充！')
 const typingText = ref('')
 const index = ref(0)
 
@@ -28,7 +28,7 @@ watch(typingText, (newVal: string) => {
 })
 
 function typingAnimation(): void {
-  const speed = 400
+  const speed = 300
   if (index.value < introText.value.length) {
     typingText.value += introText.value.charAt(index.value)
     index.value++
@@ -178,7 +178,7 @@ function switchTheme(): void {
       position: relative;
       width: 40px;
       height: 22px;
-      background-color: var(--c-white-mute);
+      background-color: var(--fc-switch-bg);
       border: 1px solid var(--fc-border-color);
       border-radius: 15px;
       cursor: pointer;
@@ -195,12 +195,21 @@ function switchTheme(): void {
         background-color: var(--fc-background-color-1);
         text-align: center;
         line-height: 18px;
+        transition: transform 0.3s;
         i {
           font-size: 12px;
           color: var(--fc-text-color);
         }
       }
     }
+  }
+}
+</style>
+
+<style lang="scss">
+.dark {
+  .switch-check {
+    transform: translateX(18px);
   }
 }
 </style>

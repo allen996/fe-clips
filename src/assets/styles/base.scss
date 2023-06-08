@@ -1,5 +1,6 @@
 :root {
   --fc-color-primary: #626aef;
+  --fc-color-primary-soft: #662d91;
   --fc-color-white: #ffffff;
   --fc-color-white-soft: #eff1f4;
   --fc-color-black: #1a1a1a;
@@ -20,13 +21,15 @@
   --fc-background-color-1: var(--fc-color-white);
   --fc-background-color-2: var(--fc-color-white-soft);
 
+  --fc-switch-bg: var(--fc-color-white-soft);
+
   --fc-border-color: var(--fc-color-divider-light-1);
   --fc-border-color-hover: var(--fc-color-gray);
 
   --fc-heading-color: var(--fc-color-text-light-1);
   --fc-text-color: var(--fc-color-text-light-1);
 
-  --fc-gradient: to left, var(--fc-color-white-soft), transparent;
+  --fc-gradient: to right, transparent, var(--fc-color-white-soft);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,13 +37,15 @@
     --fc-background-color-1: var(--fc-color-black);
     --fc-background-color-2: var(--fc-color-black-soft);
 
+    --fc-switch-bg: var(--fc-color-divider-dark-1);
+
     --fc-border-color: var(--fc-color-divider-dark-1);
     --fc-border-color-hover: var(--fc-color-gray);
 
     --fc-heading-color: var(--fc-color-text-dark-1);
     --fc-text-color: var(--fc-color-text-dark-2);
 
-    --fc-gradient-direction: to right, var(--fc-color-black-soft), transparent;
+    --fc-gradient: to right, transparent, var(--fc-color-black-soft);
   }
 }
 
@@ -48,13 +53,15 @@
   --fc-background-color-1: var(--fc-color-black);
   --fc-background-color-2: var(--fc-color-black-soft);
 
+  --fc-switch-bg: var(--fc-color-divider-dark-1);
+
   --fc-border-color: var(--fc-color-divider-dark-1);
   --fc-border-color-hover: var(--fc-color-gray);
 
   --fc-heading-color: var(--fc-color-text-dark-1);
   --fc-text-color: var(--fc-color-text-dark-2);
 
-  --fc-gradient-direction: to right, var(--fc-color-black-soft), transparent;
+  --fc-gradient: to right, transparent, var(--fc-color-black-soft);
 }
 
 body {
