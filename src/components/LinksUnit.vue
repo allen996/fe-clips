@@ -5,16 +5,16 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="clips">
+  <div class="links">
     <header>
       <h2>
         <slot name="header">默认</slot>
       </h2>
       <i class="iconfont icon-link2"></i>
     </header>
-    <div class="clips-list" v-for="(item, index) in props.classify" :key="index">
-      <div class="clips-list-label">{{ item.label }}</div>
-      <div class="clips-list-item">
+    <div class="links-list" v-for="(item, index) in props.classify" :key="index">
+      <div class="links-list-label">{{ item.label }}</div>
+      <div class="links-list-item">
         <a
           class="link"
           v-for="(link, index) in item.link"
@@ -35,7 +35,7 @@ const props = defineProps<{
 </template>
 
 <style lang="scss" scoped>
-.clips {
+.links {
   width: 100%;
   background: var(--fc-background-color-1);
   padding: 40px;
@@ -71,14 +71,14 @@ const props = defineProps<{
       }
     }
   }
-  .clips-list {
+  .links-list {
     border-bottom: 2px dashed #a3a4ab;
     padding-bottom: 10px;
-    .clips-list-label {
+    .links-list-label {
       font-size: 16px;
       margin: 10px 0;
     }
-    .clips-list-item {
+    .links-list-item {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       grid-gap: 20px 10px;
@@ -91,8 +91,10 @@ const props = defineProps<{
         padding: 15px 20px;
         &:hover {
           border: 1px solid var(--fc-color-primary);
+          transition: border 0.7s ease-in-out;
           h3 {
             color: var(--fc-color-primary);
+            transition: color 0.5s ease-in-out;
             &::before {
               transform: translate(-50%, 0) scaleX(1);
             }

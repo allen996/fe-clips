@@ -5,7 +5,7 @@ export const useLinkStore = defineStore('link', () => {
   const link = reactive(
     [
       {
-        menu: '前端工具',
+        nav: '前端工具',
         classify: [
           {
             label: '在线编辑',
@@ -24,7 +24,7 @@ export const useLinkStore = defineStore('link', () => {
         ]
       },
       {
-        menu: '社区',
+        nav: '社区',
         classify: [
           {
             label: '在线编辑',
@@ -43,7 +43,7 @@ export const useLinkStore = defineStore('link', () => {
         ]
       },
       {
-        menu: '技术',
+        nav: '技术',
         classify: [
           {
             label: '在线编辑',
@@ -62,7 +62,7 @@ export const useLinkStore = defineStore('link', () => {
         ]
       },
       {
-        menu: '插件',
+        nav: '插件',
         classify: [
           {
             label: '在线编辑',
@@ -81,7 +81,7 @@ export const useLinkStore = defineStore('link', () => {
         ]
       },
       {
-        menu: '书籍',
+        nav: '书籍',
         classify: [
           {
             label: '在线编辑',
@@ -100,7 +100,7 @@ export const useLinkStore = defineStore('link', () => {
         ]
       },
       {
-        menu: '设计',
+        nav: '设计',
         classify: [
           {
             label: '在线编辑',
@@ -119,7 +119,7 @@ export const useLinkStore = defineStore('link', () => {
         ]
       },
       {
-        menu: '应聘',
+        nav: '应聘',
         classify: [
           {
             label: '在线编辑',
@@ -138,7 +138,7 @@ export const useLinkStore = defineStore('link', () => {
         ]
       },
       {
-        menu: '其他',
+        nav: '其他',
         classify: [
           {
             label: '在线编辑',

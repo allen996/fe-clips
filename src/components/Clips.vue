@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ClipsUnit from './ClipsUnit.vue'
+import LinksUnit from './LinksUnit.vue'
 
 defineProps<{
   links: any
@@ -8,9 +8,9 @@ defineProps<{
 
 <template>
   <main id="main">
-    <ClipsUnit v-for="item in links" :key="item.menu" v-bind="item">
-      <template #header>{{ item.menu }}</template>
-    </ClipsUnit>
+    <LinksUnit v-for="item in links" :key="item.nav" v-bind="item">
+      <template #header>{{ item.nav }}</template>
+    </LinksUnit>
     <div class="placeholder">
       <div class="placeholder-bg"></div>
       <img src="../assets/images/share_link.svg" alt="" />

@@ -2,15 +2,15 @@
 import { onMounted, ref, watch } from 'vue'
 
 defineProps<{
-  menus: any
+  navs: any
   current: any
 }>()
 const emits = defineEmits<{
-  scroll: [id: number, menu: string]
+  scroll: [nav: string]
 }>()
 
-function menuActive(id: number, menu: string): void {
-  emits('scroll', id, menu)
+function navActive(nav: string): void {
+  emits('scroll', nav)
 }
 
 const introText = ref('本项目旨在收录前端各类资源，期待大佬帮助补充！')
@@ -59,10 +59,10 @@ function switchTheme(): void {
       <i class="iconfont icon-clips-logo"></i>
       <h1>前端回形针</h1>
     </div>
-    <nav class="menu">
+    <nav class="nav">
       <ul>
-        <li v-for="item in menus" :key="item.id" @click="menuActive(item.id, item.menu)">
-          <a class="menu-item" :class="{ active: current === item.id }">{{ item.menu }}</a>
+        <li v-for="item in navs" :key="item.id" @click="navActive(item.nav)">
+          <a class="nav-item" :class="{ active: current === item.id }">{{ item.nav }}</a>
         </li>
       </ul>
     </nav>
@@ -106,14 +106,14 @@ function switchTheme(): void {
     }
   }
 
-  .menu {
+  .nav {
     text-align: center;
     ul {
       padding: 15px 0;
       border-bottom: 1px solid #a3a4ab;
       li {
         margin-bottom: 5px;
-        .menu-item {
+        .nav-item {
           display: block;
           width: 100%;
           height: 50px;
@@ -129,9 +129,9 @@ function switchTheme(): void {
         .active {
           color: #fff;
           background: #626aef;
-          animation: menu 1.2s ease-out;
+          animation: nav 1.2s ease-out;
         }
-        @keyframes menu {
+        @keyframes nav {
           0% {
             transform: scale(0);
           }
