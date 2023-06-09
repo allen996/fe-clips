@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3977822 */
-  src: url('iconfont.woff2?t=1686212539541') format('woff2'),
-       url('iconfont.woff?t=1686212539541') format('woff'),
-       url('iconfont.ttf?t=1686212539541') format('truetype');
+  src: url('iconfont.woff2?t=1686329476347') format('woff2'),
+       url('iconfont.woff?t=1686329476347') format('woff'),
+       url('iconfont.ttf?t=1686329476347') format('truetype');
 }
 
 .iconfont {
@@ -13,8 +13,36 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-arrow-right:before {
-  content: "\e600";
+.icon-sun:before {
+  content: "\e602";
+}
+
+.icon-sun1:before {
+  content: "\e7ad";
+}
+
+.icon-github:before {
+  content: "\e628";
+}
+
+.icon-GitHub:before {
+  content: "\ea0a";
+}
+
+.icon-Mail-:before {
+  content: "\e625";
+}
+
+.icon-close:before {
+  content: "\e601";
+}
+
+.icon-Attache-Mail1:before {
+  content: "\eaf3";
+}
+
+.icon-mail:before {
+  content: "\e692";
 }
 
 .icon-link:before {
@@ -35,10 +63,6 @@
 
 .icon-moon:before {
   content: "\e6c3";
-}
-
-.icon-sun:before {
-  content: "\e722";
 }
 
 .icon-clips-logo1:before {
