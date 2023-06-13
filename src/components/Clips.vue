@@ -1,17 +1,9 @@
 <script setup lang="ts">
 import LinksUnit from './LinksUnit.vue'
-import Dialog from './Dialog.vue'
-import { ref } from 'vue'
 
 defineProps<{
   links: any
 }>()
-
-let isShowDialog = ref(false)
-function handleDialog(): void {
-  isShowDialog.value = !isShowDialog.value
-  console.log(isShowDialog.value)
-}
 </script>
 
 <template>
@@ -20,9 +12,8 @@ function handleDialog(): void {
       <template #header>{{ item.nav }}</template>
     </LinksUnit>
     <div class="placeholder">
-      <img src="../assets/images/share_link.svg" alt="共享链接" @click="handleDialog" />
+      <img src="../assets/images/share_link.svg" alt="共享链接" />
     </div>
-    <Dialog v-if="isShowDialog" />
   </main>
 </template>
 

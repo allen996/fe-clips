@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, ref, watch } from 'vue'
+import Dialog from './Dialog.vue'
 
 defineProps<{
   navs: any
@@ -51,6 +52,16 @@ function switchTheme(): void {
     document.documentElement.classList.remove('dark')
   }
 }
+
+let isShowDialog = ref(false)
+function openDialog(): void {
+  isShowDialog.value = true
+  document.documentElement.style.overflow = 'hidden'
+}
+function closeDialog(): void {
+  isShowDialog.value = false
+  document.documentElement.style.overflow = 'auto'
+}
 </script>
 
 <template>
@@ -72,12 +83,16 @@ function switchTheme(): void {
     <div class="theme">
       <span class="text">外观</span>
       <button class="switch" :aria-checked="check" @click="switchTheme">
-        <span class="switch-check" :class="{ dark: check }">
+        <span class="switch-check">
           <i class="iconfont icon-moon" v-if="check"></i>
           <i class="iconfont icon-sun" v-else></i>
         </span>
       </button>
     </div>
+    <div class="share" @click="openDialog">
+      <i class="iconfont icon-tianjia"></i>
+    </div>
+    <Dialog v-if="isShowDialog" @close="closeDialog" />
   </nav>
 </template>
 
@@ -88,10 +103,6 @@ function switchTheme(): void {
   height: 100vh;
   background: var(--fc-background-color-1);
   padding: 30px;
-
-  .dark {
-    transform: translateX(18px);
-  }
 
   .logo {
     display: flex;
@@ -109,7 +120,7 @@ function switchTheme(): void {
   .nav {
     text-align: center;
     ul {
-      padding: 15px 0;
+      padding: 10px 0;
       border-bottom: 1px solid #a3a4ab;
       li {
         margin-bottom: 5px;
@@ -150,8 +161,10 @@ function switchTheme(): void {
   }
 
   .intro {
-    height: 50px;
+    height: 2.625rem;
     margin: 10px 0;
+    font-size: 0.875rem;
+    text-decoration: 1.5px underline wavy;
     .caret {
       border-right: 2px solid #626aef;
       animation: caret 1.2s infinite;
@@ -201,6 +214,21 @@ function switchTheme(): void {
           color: var(--fc-text-color);
         }
       }
+    }
+  }
+
+  .share {
+    width: 100%;
+    height: 48px;
+    border: 4px dashed var(--fc-border-color);
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    i {
+      align-self: center;
+      color: var(--fc-heading-color);
     }
   }
 }
