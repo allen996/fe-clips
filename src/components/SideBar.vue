@@ -164,7 +164,7 @@ function closeDialog(): void {
     height: 2.625rem;
     margin: 10px 0;
     font-size: 0.875rem;
-    text-decoration: 1.5px underline wavy;
+    // text-decoration: 1.5px underline wavy;
     .caret {
       border-right: 2px solid #626aef;
       animation: caret 1.2s infinite;

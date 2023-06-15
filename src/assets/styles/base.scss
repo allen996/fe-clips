@@ -66,6 +66,31 @@
   --fc-gradient: to right, transparent, var(--fc-color-black-soft);
 }
 
+html {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--fc-color-primary) transparent;
+  scrollbar-highlight-color: var(--fc-color-primary);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  scrollbar-width: inherit;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--fc-color-primary);
+  // background: hsl(214, 13%, 75%);
+  border-radius: 4px;
+}
+
 body {
   min-height: 100vh;
   color: var(--fc-text-color);

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 const emits = defineEmits<{
   close: any
@@ -9,24 +9,39 @@ function close(): void {
 }
 
 const showDropdown = ref(false)
+const rotateObj = reactive({
+  transform: 'rotate(0)',
+  transition: 'transform 0.8s'
+})
 function handleSelectDropdown(): void {
   showDropdown.value = !showDropdown.value
+  if (showDropdown.value) {
+    rotateObj.transform = 'rotate(-0.5turn)'
+  } else {
+    rotateObj.transform = 'rotate(0)'
+  }
+}
+
+const isShowEmail = ref(false)
+function enterEmail(): void {
+  isShowEmail.value = true
+}
+function cancelEmail(): void {
+  isShowEmail.value = false
 }
 </script>
 
 <template>
   <Teleport to="body">
     <div class="overlay" @click.self="close">
-      <div class="dialog" v-if="false">
+      <div class="dialog">
         <header>
-          <h3>选择共享资源的方式</h3>
-          <button class="dialog-close" @click="close">
-            <i class="iconfont icon-close"></i>
-          </button>
+          选择共享资源的方式
+          <i class="iconfont icon-close" @click="close"></i>
         </header>
         <div class="content">
           <div class="way">
-            <button id="email">
+            <button id="email" @click="enterEmail">
               <i class="iconfont icon-clips-logo1"></i>
             </button>
             <span>邮箱</span>
@@ -41,7 +56,7 @@ function handleSelectDropdown(): void {
           </div>
         </div>
       </div>
-      <div class="form" v-else>
+      <div class="email" v-if="isShowEmail">
         <header>请输入您想要分享的资源</header>
         <form action="">
           <div class="name">
@@ -61,18 +76,24 @@ function handleSelectDropdown(): void {
             <div class="select">
               <div class="selector" @click="handleSelectDropdown">
                 <input type="text" placeholder="请选择链接相应的类别" readonly />
-                <i class="iconfont icon-downarrow1f"></i>
+                <i class="iconfont icon-downarrow1f" :style="rotateObj"></i>
               </div>
-              <ul class="options" v-show="showDropdown">
-                <li>111</li>
-                <li>222</li>
-                <li>333</li>
-              </ul>
+              <Transition name="dropdown">
+                <ul class="options" v-show="showDropdown">
+                  <li>111</li>
+                  <li>222</li>
+                  <li>333</li>
+                  <li>333</li>
+                  <li>333</li>
+                  <li>333</li>
+                  <li>333</li>
+                </ul>
+              </Transition>
             </div>
           </div>
         </form>
         <footer>
-          <button>取消</button>
+          <button @click="cancelEmail">取消</button>
           <button>确认</button>
         </footer>
       </div>
@@ -90,7 +111,8 @@ function handleSelectDropdown(): void {
   background-color: rgba(0, 0, 0, 0.5);
 
   .dialog,
-  .form {
+  .email {
+    width: 50vw;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -98,33 +120,47 @@ function handleSelectDropdown(): void {
     background-color: var(--fc-background-color-1);
     border-radius: 4px;
     z-index: 9999;
+
+    header {
+      margin: 20px 30px;
+      font-size: 1.2rem;
+    }
+
+    footer {
+      text-align: end;
+      padding: 20px 50px 40px;
+      button {
+        padding: 5px 20px;
+        border: 1px solid var(--fc-border-color);
+        border-radius: 5px;
+        cursor: pointer;
+        &:last-child {
+          margin-left: 10px;
+        }
+      }
+    }
   }
 
   .dialog {
-    width: 360px;
-    height: 200px;
     text-align: center;
 
     i {
       cursor: pointer;
       color: var(--fc-text-color);
-    }
-    header {
-      margin-bottom: 20px;
-      position: relative;
-      i {
-        position: absolute;
-        top: 0;
-        right: 0;
+
+      &.icon-close {
         font-size: 1.3rem;
+        float: right;
         &:hover {
           color: var(--fc-color-primary);
         }
       }
     }
+
     .content {
       display: flex;
       justify-content: space-evenly;
+      padding: 30px 40px 50px;
       i {
         font-size: 2.5rem;
       }
@@ -134,27 +170,11 @@ function handleSelectDropdown(): void {
       }
     }
   }
-  .form {
-    width: 50%;
+  .email {
     caret-color: var(--fc-color-primary);
-    header {
-      margin: 20px;
-      font-size: 1.2rem;
-    }
-    footer {
-      text-align: end;
-      padding: 20px 40px 40px;
-      button {
-        padding: 5px 20px;
-        border: 1px solid var(--fc-border-color);
-        border-radius: 5px;
-        &:last-child {
-          margin-left: 10px;
-        }
-      }
-    }
+
     form {
-      padding: 20px 40px;
+      padding: 20px 50px;
       > div {
         display: flex;
         justify-content: space-between;
@@ -196,14 +216,40 @@ function handleSelectDropdown(): void {
             top: 35px;
             left: 0;
             width: 100%;
+            max-height: 200px;
             border-radius: 5px;
             background-color: var(--fc-background-color-1);
             box-shadow: 0 0 12px var(--fc-color-shadow);
-            padding: 6px 0;
+            padding: 6px 20px 6px 10px;
+            overflow: hidden;
+            scrollbar-gutter: stable;
             z-index: 9999;
+            &:hover {
+              overflow: auto;
+            }
             li {
               padding: 0 30px;
+              border-radius: 5px;
+              background-color: var(--fc-background-color-2);
+              overflow: hidden;
+              cursor: pointer;
+              &:not(:last-child) {
+                margin-bottom: 6px;
+              }
             }
+          }
+
+          .dropdown-enter-active,
+          .dropdown-leave-active {
+            max-height: 200px;
+            transition: max-height 0.6s ease-in, opacity 1s ease-in-out;
+          }
+
+          .dropdown-enter-from,
+          .dropdown-leave-to {
+            max-height: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease, max-height 1s ease-out;
           }
         }
       }
