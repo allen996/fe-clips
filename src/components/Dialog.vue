@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed } from 'vue'
 
 const emits = defineEmits<{
   close: any
@@ -7,6 +7,34 @@ const emits = defineEmits<{
 function close(): void {
   emits('close')
 }
+
+const emailFormData = reactive({
+  name: '',
+  link: '',
+  description: '',
+  category: ''
+})
+
+const isNameValid = computed(() => {
+  if (!shouldValid.value) {
+    return false
+  }
+  return emailFormData.name.trim().length > 0
+})
+const isLinkValid = computed(() => {
+  if (!shouldValid.value) {
+    return false
+  }
+  return emailFormData.link.trim().length > 0
+})
+const isCategoryValid = computed(() => {
+  if (!shouldValid.value) {
+    return false
+  }
+  return emailFormData.category.trim().length > 0
+})
+
+const optionsList = reactive(['111', '222', '333', 'aaa', 'bbb', 'ccc'])
 
 const showDropdown = ref(false)
 const rotateObj = reactive({
@@ -30,13 +58,34 @@ function cancelEmail(): void {
   isShowEmail.value = false
 }
 
-const selected = ref('')
-async function handleSeleted(e: MouseEvent): Promise<void> {
+function handleSeleted(e: MouseEvent): void {
   const target = e.target as HTMLElement
 
   if (target.tagName === 'LI') {
-    selected.value = target.textContent!
+    emailFormData.category = target.textContent!
+    handleSelectDropdown()
   }
+}
+
+const shouldValid = ref(false)
+function submitEmailForm(e: Event): void {
+  e.preventDefault()
+  shouldValid.value = true
+
+  if (!isNameValid.value || !isLinkValid.value || !isCategoryValid.value) return
+  const data = {
+    name: emailFormData.name,
+    link: emailFormData.link,
+    description: emailFormData.description,
+    category: emailFormData.category
+  }
+  emailFormData.name = ''
+  emailFormData.link = ''
+  emailFormData.description = ''
+  emailFormData.category = ''
+  console.log(data)
+  shouldValid.value = false
+  isShowEmail.value = false
 }
 </script>
 
@@ -70,50 +119,70 @@ async function handleSeleted(e: MouseEvent): Promise<void> {
       <Transition name="email">
         <div class="email" v-if="isShowEmail">
           <header>请输入您想要分享的资源</header>
-          <form action="">
-            <div class="name">
-              <label for="">链接名</label>
-              <input type="text" />
-            </div>
-            <div class="link">
-              <label for="">链接地址</label>
-              <input type="text" />
-            </div>
-            <div class="description">
-              <label for="">描述</label>
-              <input type="text" />
-            </div>
-            <div class="category">
-              <label for="">类别</label>
-              <div class="select">
-                <div class="selector" @click="handleSelectDropdown">
+          <form @submit="submitEmailForm">
+            <div class="form-content">
+              <div class="name">
+                <label for="name">链接名</label>
+                <div class="input">
+                  <input type="text" id="name" v-model="emailFormData.name" autocomplete="off" />
+                  <div class="error-valid" v-if="shouldValid && !isNameValid">请输入链接名!</div>
+                </div>
+              </div>
+              <div class="link">
+                <label for="link">链接地址</label>
+                <div class="input">
+                  <input type="text" id="link" v-model="emailFormData.link" autocomplete="off" />
+                  <div class="error-valid" v-if="shouldValid && !isLinkValid">请输入链接地址!</div>
+                </div>
+              </div>
+              <div class="description">
+                <label for="description">描述</label>
+                <div class="input">
                   <input
                     type="text"
-                    placeholder="请选择链接相应的类别"
-                    readonly
-                    :value="selected"
-                    id="category"
+                    id="description"
+                    v-model="emailFormData.description"
+                    autocomplete="off"
                   />
-                  <i class="iconfont icon-downarrow1f" :style="rotateObj"></i>
                 </div>
-                <Transition name="dropdown">
-                  <ul class="options" v-show="showDropdown" @click="handleSeleted">
-                    <li value="111">111</li>
-                    <li value="222">222</li>
-                    <li value="333">333</li>
-                    <li>333</li>
-                    <li>333</li>
-                    <li>333</li>
-                    <li>333</li>
-                  </ul>
-                </Transition>
+              </div>
+              <div class="category">
+                <label for="category">类别</label>
+                <div class="select">
+                  <div class="selector" @click="handleSelectDropdown">
+                    <input
+                      type="text"
+                      placeholder="请选择链接相应的类别"
+                      readonly
+                      v-model="emailFormData.category"
+                      id="category"
+                    />
+                    <i class="iconfont icon-downarrow1f" :style="rotateObj"></i>
+                  </div>
+                  <div class="error-valid" v-if="shouldValid && !isCategoryValid">
+                    请选择链接相应的类别!
+                  </div>
+
+                  <Transition name="dropdown">
+                    <ul class="options" v-show="showDropdown" @click="handleSeleted">
+                      <li
+                        v-for="(item, index) in optionsList"
+                        :key="index"
+                        :class="item === emailFormData.category ? 'selected' : ''"
+                        :value="item"
+                      >
+                        {{ item }}
+                      </li>
+                    </ul>
+                  </Transition>
+                </div>
               </div>
             </div>
+            <footer>
+              <button @click="cancelEmail">取消</button>
+              <button type="submit">确认</button>
+            </footer>
           </form>
-          <footer>
-            <button @click="cancelEmail">取消</button>
-            <button>确认</button>
-          </footer>
         </div>
       </Transition>
     </div>
@@ -176,6 +245,14 @@ async function handleSeleted(e: MouseEvent): Promise<void> {
         }
       }
     }
+
+    .error-valid {
+      color: red;
+      font-size: 0.75rem;
+      line-height: 1;
+      position: absolute;
+      margin-top: 5px;
+    }
   }
 
   .dialog {
@@ -211,19 +288,27 @@ async function handleSeleted(e: MouseEvent): Promise<void> {
   .email {
     caret-color: var(--fc-color-primary);
 
-    form {
+    .form-content {
       padding: 20px 50px 20px 30px;
+
       > div {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
+
         label {
           width: 20%;
           text-align: end;
           padding-right: 20px;
+          &:not([for='description'])::before {
+            content: '*';
+            color: red;
+            margin-right: 4px;
+          }
         }
-        input,
+
+        .input,
         .select {
           width: 80%;
           line-height: 2rem;
@@ -268,11 +353,14 @@ async function handleSeleted(e: MouseEvent): Promise<void> {
             li {
               padding: 0 30px;
               border-radius: 5px;
-              background-color: var(--fc-background-color-2);
               overflow: hidden;
               cursor: pointer;
-              &:not(:last-child) {
-                margin-bottom: 6px;
+              &:hover {
+                background-color: var(--fc-background-color-2);
+              }
+              &.selected {
+                color: var(--fc-color-primary);
+                font-weight: bold;
               }
             }
           }
